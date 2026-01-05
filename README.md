@@ -3,10 +3,13 @@
 SynthToSoul is a full-stack audio analysis application designed to distinguish between **Human-Made** and **AI-Generated** music. By combining a custom Deep Learning classifier with audio fingerprinting technology, the system not only detects the origin of a track but also identifies real-world songs that sound similar to AI-generated uploads.
 
 <!-- ![Project Screenshot](public/placeholder.svg) -->
+Our core backend uses a binary classification CNN trained on Mel spectrograms and Similarity Search algorithm through FAISS and KNN to find the top $k$ most similar human-made tracks based on cosine similarity of waveform embeddings and genre similarity. The dataset comes from the GTZAN dataset for Human-Made tracks and SONICS for AI-Generated tracks.
+
+Details to our core backend and ML models as well as performance results are provided in our paper [here](https://github.com/daniel-alonso-valencia/SynthToSoul/blob/main/research_paper.pdf)
 
 ## 🚀 Key Features
 
-*   **AI vs. Human Detection**: Uses a custom Convolutional Neural Network (CNN) trained on Mel spectrograms to classify audio files with high accuracy.
+*   **AI vs. Human Detection**: Uses a custom Convolutional Neural Network (CNN) trained on Mel spectrograms from GTZAN (human-made tracks) and SONICS (AI-generated tracks) datasets to classify audio files with high accuracy.
 *   **Similarity Search**: If a song is flagged as AI-generated, the system uses **TorchOpenL3** embeddings and **FAISS** (Facebook AI Similarity Search) to find the top $k$ most similar human-made tracks from the GTZAN dataset.
 *   **Interactive UI**: A polished, retro-vinyl themed interface built with React, featuring drag-and-drop file uploads, real-time status updates, and audio visualizations.
 *   **Privacy-First**: Human-made tracks are deleted immediately after analysis to respect copyright and privacy; only AI tracks are temporarily processed for similarity matching.
@@ -18,7 +21,7 @@ SynthToSoul is a full-stack audio analysis application designed to distinguish b
 *   **PyTorch**: Powers the custom CNN model (`AudioCNN`) for binary classification.
 *   **Audio Processing**: `torchaudio` and `librosa` for spectrogram conversion.
 *   **Similarity Engine**: `torchopenl3` for deep audio embeddings and `faiss` for efficient vector similarity search.
-*   **Data Handling**: `pandas` and `numpy` for managing the GTZAN dataset metadata and embeddings.
+*   **Data Handling**: `pandas` and `numpy` for managing the SONICS and GTZAN dataset metadata and embeddings.
 
 ### Frontend
 *   **React (Vite)**: Fast, modern frontend framework.

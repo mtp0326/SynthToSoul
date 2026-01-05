@@ -137,6 +137,15 @@ const Index = () => {
           <span className="font-display">SynthToSoul</span>
           <span className="opacity-50">•</span>
           <span>Support human artists</span>
+          <span className="opacity-50">•</span>
+          <a 
+            href="/research_paper.pdf" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="hover:text-foreground transition-colors underline decoration-dotted underline-offset-4"
+          >
+            Research Paper
+          </a>
         </div>
       </footer>
     </div>
