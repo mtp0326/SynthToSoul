@@ -1,0 +1,14 @@
+torchcodec
+Flask
+flask-cors
+torch
+torchaudio
+librosa
+numpy
+faiss-cpu
+torchopenl3
+soundfile
+tqdm
+six
+julius
+nnAudio
