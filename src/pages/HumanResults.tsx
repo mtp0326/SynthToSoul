@@ -164,9 +164,9 @@ const HumanResults = () => {
       <footer className="mt-20 text-center relative z-10">
         <div className="flex items-center justify-center gap-2 text-muted-foreground text-sm">
           <VinylRecord size="sm" isPlaying />
-          <span className="font-display">VinylMatch</span>
+          <span className="font-display">SynthToSoul</span>
           <span className="opacity-50">•</span>
-          <span>Celebrating human artistry</span>
+          <span>Support human artists</span>
         </div>
       </footer>
     </div>

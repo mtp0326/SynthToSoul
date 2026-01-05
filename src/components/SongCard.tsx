@@ -1,15 +1,7 @@
 import { Play, Music2 } from "lucide-react";
 import VinylRecord from "./VinylRecord";
 import { cn } from "@/lib/utils";
-
-interface Song {
-  id: number;
-  title: string;
-  artist: string;
-  album: string;
-  similarity: number;
-  genre: string;
-}
+import { Song } from "@/data/mockSongs";
 
 interface SongCardProps {
   song: Song;

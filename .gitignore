@@ -31,3 +31,4 @@ venv/
 .venv/
 env/
 .env
+backend/csv/fake_songs.csv

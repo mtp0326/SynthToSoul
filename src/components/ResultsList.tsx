@@ -1,14 +1,5 @@
 import SongCard from "./SongCard";
-
-interface Song {
-  id: number;
-  title: string;
-  artist: string;
-  album: string;
-  year: number;
-  similarity: number;
-  genre: string;
-}
+import { Song } from "@/data/mockSongs";
 
 interface ResultsListProps {
   songs: Song[];
