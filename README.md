@@ -5,7 +5,7 @@ SynthToSoul is a full-stack audio analysis application designed to distinguish b
 <!-- ![Project Screenshot](public/placeholder.svg) -->
 Our core backend uses a binary classification CNN trained on Mel spectrograms and Similarity Search algorithm through FAISS and KNN to find the top $k$ most similar human-made tracks based on cosine similarity of waveform embeddings and genre similarity. The dataset comes from the GTZAN dataset for Human-Made tracks and SONICS for AI-Generated tracks.
 
-Details to our core backend and ML models as well as performance results are provided in our paper [here](https://github.com/daniel-alonso-valencia/SynthToSoul/blob/main/research_paper.pdf)
+**Details to our core backend and ML models as well as performance results are provided in our paper [here](public/research_paper.pdf)**
 
 ## 🚀 Key Features
 
