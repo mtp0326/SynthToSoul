@@ -1,13 +1,31 @@
-# SynthToSoul 💿🎶
-# (Human vs. AI Music Detector and Top-K Similar Songs Recommender)
+# SynthToSoul 💿🎶 (Human vs. AI Music Detector and Top-K Similar Songs Recommender)
 
 Duration: November 2025 - January 2026
 
-# Team Members
+## Team Members
 - Matt (Jiwoong) Park [mtp0326@seas.upenn.edu],
 - Hassan Rizwan [hrizwan3@seas.upenn.edu],
 - Stanley Liu [stanleey@seas.upenn.edu],
 - Spencer Ware [wares@seas.upenn.edu]
+
+## Contents
+- [Overview](#overview)
+- [Link to our Research Paper](#link-to-our-research-paper)
+- [Video Demo](#video-demo)
+- [Key Features](#key-features)
+- [Tech Stack](#tech-stack)
+- [How It Works](#how-it-works)
+- [Installation](#installation)
+- [Resources](#resources)
+
+## Overview
+
+<div style="display: flex; justify-content: center; gap: 20px;">
+  <img src="media/homepage.png" alt="Homepage" width="49%" />
+  <img src="media/aidetectpage.png" alt="AI Detect Page" width="49%" />
+
+</div>
+
 
 SynthToSoul is a full-stack audio analysis application designed to distinguish between **Human-Made** and **AI-Generated** music. By combining a custom Deep Learning classifier with audio fingerprinting technology, the system not only detects the origin of a track but also identifies real-world songs that sound similar to AI-generated uploads.
 
@@ -19,6 +37,10 @@ The code was previously moved from a private repository.
 ## Link to our Research Paper
 
 **[PLEASE READ] Details to our core backend and ML models as well as performance results are provided in our paper [here](public/research_paper.pdf).**
+
+## Video Demo
+
+[![Demo Video](https://img.youtube.com/vi/2JOW_FyJLlY/0.jpg)](https://youtu.be/2JOW_FyJLlY)
 
 ## Key Features
 
@@ -51,6 +73,25 @@ The code was previously moved from a private repository.
 4.  **Action**:
     *   **Human-Made**: The user is notified, and the file is securely deleted.
     *   **AI-Generated**: The system generates an audio embedding and queries the FAISS index to find the nearest "real song" neighbors, displaying them as similar tracks.
+
+## Page Results
+
+### Song is AI-Generated
+
+<img src="media/ai1.gif" alt="AI1 Result" width="70%" />
+
+- Used an AI-Generated song "fake_54229_udio_0.mp3" from the SONICS dataset. The system runs the file through the CNN model and finds that it is AI-Generated through binary classification.
+
+<img src="media/ai2.gif" alt="AI2 Result" width="70%" />
+
+- After finding that the song is AI-Generated, the system generates an audio embedding using TorchOpenL3 and queries the FAISS index to find the Top-K nearest "real song" neighbors from the GTZAN dataset, displaying them as similar tracks.
+
+### Song is Human-Made
+
+<img src="media/human1.gif" alt="Human Result" width="70%" />
+
+- Used a human-made song "metal.00022.wav" ("Crazy Train" by Ozzy Osbourne) from the GTZAN dataset. The system runs the file through the CNN model and finds that it is Human-Made through binary classification.
+- We then map the song to the helper dataframe containing the names of the songs and their artists can be assembled using the data provided by B.L. Sturm.
 
 ## Project Structure
 
@@ -116,9 +157,11 @@ npm install
 You can run both the frontend and backend concurrently (recommended) or separately.
 
 ### Concurrent Start
+
 ```bash
-npm run dev
+yarn dev
 ```
+
 This command (configured in `package.json`) starts both the Vite dev server and the Flask backend.
 
 ### Manual Start
@@ -134,7 +177,7 @@ The server will start at `http://localhost:8000`.
 ```bash
 npm run dev:frontend
 ```
-The app will be available at `http://localhost:8080`.
+The app will be available at `http://localhost:5174/`.
 
 ## Resources
 
