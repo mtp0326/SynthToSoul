@@ -1,5 +1,4 @@
-import SongCard from "./SongCard";
-import { Song } from "@/data/mockSongs";
+import SongCard, { Song } from "./SongCard";
 
 interface ResultsListProps {
   songs: Song[];

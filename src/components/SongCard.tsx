@@ -1,13 +1,21 @@
 import { Play, Music2 } from "lucide-react";
 import VinylRecord from "./VinylRecord";
 import { cn } from "@/lib/utils";
-import { Song } from "@/data/mockSongs";
+
+export interface Song {
+  id: number;
+  title: string;
+  artist: string;
+  album: string;
+  similarity: number;
+  genre: string;
+}
 
 interface SongCardProps {
   song: Song;
   rank?: number;
   delay?: number;
-  detailed?: boolean; // Add this new prop
+  detailed?: boolean;
 }
 
 const SongCard = ({ song, rank, delay = 0, detailed = false }: SongCardProps) => {

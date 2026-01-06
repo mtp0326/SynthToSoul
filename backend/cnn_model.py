@@ -3,16 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import os
 
-# --- Model Definition ---
 class AudioCNN(nn.Module):
-    """
-    Convolutional Neural Network for binary audio classification
-    Input shape: (batch_size, 1, 128, 938)
-        - 1 channel (grayscale mel spectrogram)
-        - 128 mel frequency bands (height)
-        - 938 time frames (width)
-    Output: (batch_size, 1) - probability of being AI-generated
-    """
     def __init__(self, dropout_rate=0.5):
         super(AudioCNN, self).__init__()
         # Conv Block 1: 1 -> 32 channels
@@ -44,13 +35,6 @@ class AudioCNN(nn.Module):
         self.fc2 = nn.Linear(128, 1)
 
     def forward(self, x):
-        """
-        Forward pass
-        Args:
-            x: Input tensor of shape (batch_size, 1, 128, 938)
-        Returns:
-            Output tensor of shape (batch_size, 1) with sigmoid activation
-        """
         # Conv Block 1
         x = self.conv1(x)
         x = self.bn1(x)

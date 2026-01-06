@@ -5,16 +5,20 @@ SynthToSoul is a full-stack audio analysis application designed to distinguish b
 <!-- ![Project Screenshot](public/placeholder.svg) -->
 Our core backend uses a binary classification CNN trained on Mel spectrograms and Similarity Search algorithm through FAISS and KNN to find the top $k$ most similar human-made tracks based on cosine similarity of waveform embeddings and genre similarity. The dataset comes from the GTZAN dataset for Human-Made tracks and SONICS for AI-Generated tracks.
 
+The code was previously moved from a private repository.
+
+## Link to our Research Paper
+
 **Details to our core backend and ML models as well as performance results are provided in our paper [here](public/research_paper.pdf)**
 
-## 🚀 Key Features
+## Key Features
 
 *   **AI vs. Human Detection**: Uses a custom Convolutional Neural Network (CNN) trained on Mel spectrograms from GTZAN (human-made tracks) and SONICS (AI-generated tracks) datasets to classify audio files with high accuracy.
 *   **Similarity Search**: If a song is flagged as AI-generated, the system uses **TorchOpenL3** embeddings and **FAISS** (Facebook AI Similarity Search) to find the top $k$ most similar human-made tracks from the GTZAN dataset.
 *   **Interactive UI**: A polished, retro-vinyl themed interface built with React, featuring drag-and-drop file uploads, real-time status updates, and audio visualizations.
 *   **Privacy-First**: Human-made tracks are deleted immediately after analysis to respect copyright and privacy; only AI tracks are temporarily processed for similarity matching.
 
-## 🛠 Tech Stack
+## Tech Stack
 
 ### Backend
 *   **Python & Flask**: RESTful API to handle file uploads and serve predictions.
@@ -30,7 +34,36 @@ Our core backend uses a binary classification CNN trained on Mel spectrograms an
 *   **shadcn/ui**: High-quality, accessible UI components.
 *   **Visualizations**: Custom vinyl and waveform animations.
 
-## 📦 Installation
+## How It Works
+
+1.  **Upload**: User drags and drops an audio file (`.wav`, `.mp3`, `.flac`, `.ogg`) into the DropZone.
+2.  **Preprocessing**: The backend converts the audio into a Mel spectrogram tensor.
+3.  **Classification**: The CNN model analyzes the spectrogram features to predict the probability of the track being AI-generated.
+4.  **Action**:
+    *   **Human-Made**: The user is notified, and the file is securely deleted.
+    *   **AI-Generated**: The system generates an audio embedding and queries the FAISS index to find the nearest "real song" neighbors, displaying them as similar tracks.
+
+## Project Structure
+
+```
+├── backend/
+│   ├── app.py              # Flask entry point & configuration
+│   ├── routes.py           # API endpoints
+│   ├── cnn_model.py        # PyTorch CNN architecture
+│   ├── audio_search.py     # Similarity search engine (FAISS + TorchOpenL3)
+│   ├── utils.py            # Audio processing utilities
+│   ├── globals.py          # Shared state management
+│   ├── models/             # Trained .pth models
+│   └── csv/                # Dataset metadata
+├── src/
+│   ├── components/         # React components (DropZone, ResultsList, etc.)
+│   ├── pages/              # Main views (Index, AIResults, HumanResults)
+│   ├── hooks/              # Custom React hooks
+│   └── lib/                # Utilities
+└── public/                 # Static assets
+```
+
+## Installation
 
 ### Prerequisites
 *   Node.js & npm
@@ -69,7 +102,7 @@ Install the Node.js dependencies.
 npm install
 ```
 
-## 🏃‍♂️ Running the Application
+## Running the Application
 
 You can run both the frontend and backend concurrently (recommended) or separately.
 
@@ -92,34 +125,7 @@ The server will start at `http://localhost:8000`.
 ```bash
 npm run dev:frontend
 ```
-The app will be available at `http://localhost:5173`.
-
-## 🧠 How It Works
-
-1.  **Upload**: User drags and drops an audio file (`.wav`, `.mp3`, `.flac`, `.ogg`) into the DropZone.
-2.  **Preprocessing**: The backend converts the audio into a Mel spectrogram tensor.
-3.  **Classification**: The CNN model analyzes the spectrogram features to predict the probability of the track being AI-generated.
-4.  **Action**:
-    *   **Human-Made**: The user is notified, and the file is securely deleted.
-    *   **AI-Generated**: The system generates an audio embedding and queries the FAISS index to find the nearest "real song" neighbors, displaying them as similar tracks.
-
-## 📂 Project Structure
-
-```
-├── backend/
-│   ├── app.py              # Flask entry point
-│   ├── cnn_model.py        # PyTorch CNN architecture
-│   ├── audio_search.py     # Similarity search engine (FAISS + TorchOpenL3)
-│   ├── routes.py           # API endpoints
-│   ├── models/             # Trained .pth models
-│   └── csv/                # Dataset metadata
-├── src/
-│   ├── components/         # React components (DropZone, ResultsList, etc.)
-│   ├── pages/              # Main views (Index, AIResults, HumanResults)
-│   ├── hooks/              # Custom React hooks
-│   └── lib/                # Utilities
-└── public/                 # Static assets
-```
+The app will be available at `http://localhost:8080`.
 
 ## 📄 License
 [MIT](LICENSE)

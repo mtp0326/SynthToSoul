@@ -42,8 +42,6 @@ def predict_route():
                 
                 result_type = "Human-Made Classified" if prob_ai <= 0.5 else "AI Classified"
                 
-                # Cleanup logic: If Human-Made, delete the file immediately.
-                # If AI Classified, KEEP the file so /api/topkrealsongs can use it.
                 if result_type == "Human-Made Classified":
                     if os.path.exists(filepath):
                         os.remove(filepath)
@@ -87,7 +85,6 @@ def top_k_real_songs():
         rank = 1
         for _, row in results_df.iterrows():
             song_filename = os.path.basename(row.get('path', ''))
-            # Try to find in all_songs
             matched_song = next((s for s in globals.all_songs if s['filename'] == song_filename), None)
             
             title = matched_song['title'] if matched_song else row.get('title', 'Unknown Title')

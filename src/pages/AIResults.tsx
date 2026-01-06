@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { ArrowLeft, Play, Pause, Music2, AlertTriangle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import VinylRecord from "@/components/VinylRecord";
-import { Song } from "@/data/mockSongs";
+import { Song } from "@/components/SongCard";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 
@@ -19,8 +19,6 @@ const AIResults = () => {
 
   useEffect(() => {
     if (!filename) {
-      // If no filename, just stop loading or show error? 
-      // For now, let's just log it and maybe try without filename or fail gracefully.
       console.warn("No filename provided for AIResults");
       setIsLoading(false);
       return;
@@ -74,40 +72,41 @@ const AIResults = () => {
 
       {/* Header */}
       <header className="max-w-2xl mx-auto mb-12 relative z-10">
-        <Button
-          variant="ghost"
-          onClick={() => navigate("/")}
-          className="mb-6 text-muted-foreground hover:text-foreground"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Upload
-        </Button>
-
-        {/* AI Detection Warning */}
-        <div className="bg-destructive/10 border border-destructive/30 rounded-xl p-6 mb-8">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-full bg-destructive/20 flex items-center justify-center flex-shrink-0">
-              <AlertTriangle className="w-6 h-6 text-destructive" />
+        <div className="flex justify-between items-center mb-6">
+          <Button
+            variant="ghost"
+            onClick={() => navigate("/")}
+            className="text-muted-foreground hover:text-foreground"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Upload
+          </Button>
+          
+          {filename && (
+            <div className="text-sm text-muted-foreground bg-muted/50 px-3 py-1 rounded-full border border-border/50 max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
+              File: {filename}
             </div>
-            <div>
-              <h2 className="font-display text-xl font-bold text-destructive mb-2">
-                AI-Generated Music Detected
-              </h2>
-              <p className="text-muted-foreground text-sm">
-                Our analysis indicates this track may be AI-generated. Here are some similar 
-                human-made alternatives you might enjoy instead.
-              </p>
-            </div>
-          </div>
+          )}
         </div>
 
-        <div className="text-center">
-          <h1 className="font-display text-3xl font-bold text-foreground mb-2">
-            Human-Made Alternatives
+        {/* Header Section */}
+        <div className="text-center mb-12 animate-fade-in">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-destructive/10 mb-6 relative group">
+            <div className="absolute inset-0 bg-destructive/20 rounded-full animate-ping opacity-20" />
+            <AlertTriangle className="w-10 h-10 text-destructive relative z-10" />
+          </div>
+          <h1 className="font-display text-4xl font-bold text-foreground mb-4">
+            AI-Generated Content Detected
           </h1>
-          <p className="text-muted-foreground">
-            Click preview to listen to a 1-minute sample
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Our analysis indicates with high confidence that this track was generated using artificial intelligence.
           </p>
+        </div>
+
+        <div className="text-center mt-12 mb-2">
+          <h2 className="font-display text-xl font-bold text-foreground">
+            Here are Top 5 most similar Human-Made tracks from the GTZAN dataset.
+          </h2>
         </div>
       </header>
 

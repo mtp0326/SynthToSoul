@@ -3,7 +3,7 @@ import { Disc3 } from "lucide-react";
 import DropZone from "@/components/DropZone";
 import ResultsList from "@/components/ResultsList";
 import VinylRecord from "@/components/VinylRecord";
-import { mockSimilarSongs, Song } from "@/data/mockSongs";
+import { Song } from "@/components/SongCard";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -91,11 +91,11 @@ const Index = () => {
             <Disc3 className="w-8 h-8 text-primary-foreground" />
           </div>
           <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground">
-            Vinyl<span className="text-gradient">Match</span>
+            SynthTo<span className="text-gradient">Soul</span>
           </h1>
         </div>
 
-        <p className="text-lg text-muted-foreground max-w-md mx-auto">
+        <p className="text-sm md:text-base text-muted-foreground max-w-md mx-auto">
           Drop your audio file to detect if it was made by a human or AI.
         </p>
 
@@ -124,7 +124,7 @@ const Index = () => {
               Supported formats: <span className="font-semibold">.wav, .mp3, .flac, .ogg</span>
             </p>
             <p className="text-xs text-muted-foreground mt-1 opacity-70">
-              Audio fingerprinting powered by retro algorithms
+              Audio fingerprinting powered by ML models
             </p>
           </div>
         )}
@@ -144,7 +144,7 @@ const Index = () => {
             rel="noopener noreferrer" 
             className="hover:text-foreground transition-colors underline decoration-dotted underline-offset-4"
           >
-            Research Paper
+            Our Research Paper Powering the Models
           </a>
         </div>
       </footer>

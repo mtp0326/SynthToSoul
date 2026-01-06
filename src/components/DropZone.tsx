@@ -80,19 +80,15 @@ const DropZone = ({ onFileSelect, isProcessing, uploadedFile }: DropZoneProps) =
           
           {/* Main platter area - centered */}
           <div className="flex flex-col items-center">
-            {/* Platter with vinyl */}
             <div className="relative">
-              {/* Platter base */}
               <div className={cn(
                 "w-44 h-44 rounded-full bg-muted border-4 border-border flex items-center justify-center transition-all duration-300",
                 isDragging && "border-primary"
               )}>
-                {/* Vinyl record */}
                 <div className={cn(
                   "w-36 h-36 rounded-full bg-vinyl-black vinyl-grooves flex items-center justify-center transition-transform duration-500",
                   (isProcessing || uploadedFile) && "animate-spin-slow"
                 )}>
-                  {/* Center label - 1/3 ratio to match VinylRecord component */}
                   <div className={cn(
                     "w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300",
                     uploadedFile && !isProcessing
@@ -116,7 +112,7 @@ const DropZone = ({ onFileSelect, isProcessing, uploadedFile }: DropZoneProps) =
                 <div className="w-6 h-6 rounded-full bg-border" />
                 <div className={cn(
                   "absolute left-3 top-3 w-1.5 h-16 bg-muted-foreground rounded-full origin-top transition-transform duration-500",
-                  (isProcessing || uploadedFile) ? "rotate-[-30deg]" : "rotate-[20deg]"
+                  (isProcessing || uploadedFile) ? "rotate-[45deg]" : "rotate-[0deg]"
                 )} />
               </div>
             </div>
