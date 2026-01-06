@@ -3,12 +3,13 @@
 
 Duration: November 2025 - January 2026
 
-# Team Members
+## Team Members
 - Matt (Jiwoong) Park [mtp0326@seas.upenn.edu],
 - Hassan Rizwan [hrizwan3@seas.upenn.edu],
 - Stanley Liu [stanleey@seas.upenn.edu],
 - Spencer Ware [wares@seas.upenn.edu]
 
+## Overview
 SynthToSoul is a full-stack audio analysis application designed to distinguish between **Human-Made** and **AI-Generated** music. By combining a custom Deep Learning classifier with audio fingerprinting technology, the system not only detects the origin of a track but also identifies real-world songs that sound similar to AI-generated uploads.
 
 <!-- ![Project Screenshot](public/placeholder.svg) -->
