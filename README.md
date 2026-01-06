@@ -1,4 +1,13 @@
-# SynthToSoul
+# SynthToSoul 💿🎶
+# (Human vs. AI Music Detector and Top-K Similar Songs Recommender)
+
+Duration: November 2025 - January 2026
+
+# Team Members
+- Matt (Jiwoong) Park [mtp0326@seas.upenn.edu],
+- Hassan Rizwan [hrizwan3@seas.upenn.edu],
+- Stanley Liu [stanleey@seas.upenn.edu],
+- Spencer Ware [wares@seas.upenn.edu]
 
 SynthToSoul is a full-stack audio analysis application designed to distinguish between **Human-Made** and **AI-Generated** music. By combining a custom Deep Learning classifier with audio fingerprinting technology, the system not only detects the origin of a track but also identifies real-world songs that sound similar to AI-generated uploads.
 
@@ -9,7 +18,7 @@ The code was previously moved from a private repository.
 
 ## Link to our Research Paper
 
-**Details to our core backend and ML models as well as performance results are provided in our paper [here](public/research_paper.pdf)**
+**[PLEASE READ] Details to our core backend and ML models as well as performance results are provided in our paper [here](public/research_paper.pdf).**
 
 ## Key Features
 
@@ -126,6 +135,14 @@ The server will start at `http://localhost:8000`.
 npm run dev:frontend
 ```
 The app will be available at `http://localhost:8080`.
+
+## Resources
+
+- SONICS dataset on Kaggle: `https://www.kaggle.com/datasets/awsaf49/sonics-dataset`  
+- SONICS dataset on Hugging Face: `https://huggingface.co/datasets/awsaf49/sonics`  
+- Article on AI music and streaming platforms (e.g., The Guardian):  
+  `https://www.theguardian.com/technology/2025/nov/13/ai-music-spotify-billboard-charts`  
+- OpenL3 GitHub repository: `https://github.com/marl/openl3`  
 
 ## 📄 License
 [MIT](LICENSE)

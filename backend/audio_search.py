@@ -4,14 +4,10 @@ import numpy as np
 import pandas as pd
 import torchaudio
 
-# Optional imports for advanced features
-try:
-    import torchopenl3
-    import faiss
-    HAS_ADVANCED_DEPS = True
-except ImportError as e:
-    print(f"Warning: Advanced dependencies missing: {e}")
-    HAS_ADVANCED_DEPS = False
+import torchopenl3
+import faiss
+
+HAS_ADVANCED_DEPS = True
 
 class AudioSearchEngine:
     def __init__(self, cache_dir='backend/embeddings', csv_dir='backend/csv', 
@@ -34,45 +30,39 @@ class AudioSearchEngine:
         self.center = True
         self.batch_size = 32
 
-        if self.has_deps:
-            self._initialize(cache_dir, csv_dir)
+        self._initialize(cache_dir, csv_dir)
 
     def _initialize(self, cache_dir, csv_dir):
-        try:
-            device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        
+        # Load TorchOpenL3
+        self.tmodel = torchopenl3.models.load_audio_embedding_model(
+            input_repr=self.input_repr,
+            content_type=self.content_type,
+            embedding_size=self.embed_size
+        ).to(device).eval()
+        print("TorchOpenL3 model loaded.")
+
+        # Load FAISS Index and Metadata
+        meta_path = os.path.join(csv_dir, "gtzan_real_meta.csv")
+        X_path = os.path.join(cache_dir, "gtzan_real_X_pooled.npy")
+        
+        if os.path.exists(meta_path) and os.path.exists(X_path):
+            self.meta_real = pd.read_csv(meta_path)
+            X = np.load(X_path)
+            if X.ndim != 2:
+                raise ValueError(f"Pooled embeddings must be (N, D), got {X.shape}")
+            X = np.ascontiguousarray(X, dtype=np.float32)
             
-            # Load TorchOpenL3
-            self.tmodel = torchopenl3.models.load_audio_embedding_model(
-                input_repr=self.input_repr,
-                content_type=self.content_type,
-                embedding_size=self.embed_size
-            ).to(device).eval()
-            print("TorchOpenL3 model loaded.")
+            # Normalize X for Cosine Similarity (IndexFlatIP computes Inner Product)
+            faiss.normalize_L2(X)
 
-            # Load FAISS Index and Metadata
-            meta_path = os.path.join(csv_dir, "gtzan_real_meta.csv")
-            X_path = os.path.join(cache_dir, "gtzan_real_X_pooled.npy")
-            
-            if os.path.exists(meta_path) and os.path.exists(X_path):
-                self.meta_real = pd.read_csv(meta_path)
-                X = np.load(X_path)
-                if X.ndim != 2:
-                    raise ValueError(f"Pooled embeddings must be (N, D), got {X.shape}")
-                X = np.ascontiguousarray(X, dtype=np.float32)
-                
-                # Normalize X for Cosine Similarity (IndexFlatIP computes Inner Product)
-                faiss.normalize_L2(X)
-
-                d_emb = X.shape[1]
-                self.index = faiss.IndexFlatIP(d_emb)
-                self.index.add(X)
-                print(f"FAISS index loaded. Total vectors: {self.index.ntotal}")
-            else:
-                print(f"Warning: Embeddings or Metadata not found. Paths checked: {meta_path}, {X_path}")
-
-        except Exception as e:
-            print(f"Error setting up advanced search: {e}")
-            self.has_deps = False
+            d_emb = X.shape[1]
+            self.index = faiss.IndexFlatIP(d_emb)
+            self.index.add(X)
+            print(f"FAISS index loaded. Total vectors: {self.index.ntotal}")
+        else:
+            print(f"Warning: Embeddings or Metadata not found. Paths checked: {meta_path}, {X_path}")
 
     def load_audio_fixed(self, path: str):
         wav, sr = torchaudio.load(path)

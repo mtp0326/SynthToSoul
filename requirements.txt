@@ -12,3 +12,4 @@ tqdm
 six
 julius
 nnAudio
+pandas
