@@ -23,12 +23,10 @@ Duration: November 2025 - January 2026
 <div style="display: flex; justify-content: center; gap: 20px;">
   <img src="media/homepage.png" alt="Homepage" width="49%" />
   <img src="media/aidetectpage.png" alt="AI Detect Page" width="49%" />
-
 </div>
 
 SynthToSoul is a full-stack audio analysis application designed to distinguish between **Human-Made** and **AI-Generated** music. By combining a custom Deep Learning classifier with audio fingerprinting technology, the system not only detects the origin of a track but also identifies real-world songs that sound similar to AI-generated uploads.
 
-<!-- ![Project Screenshot](public/placeholder.svg) -->
 Our core backend uses a binary classification CNN trained on Mel spectrograms and Similarity Search algorithm through FAISS and KNN to find the top $k$ most similar human-made tracks based on cosine similarity of waveform embeddings and genre similarity. The dataset comes from the GTZAN dataset for Human-Made tracks and SONICS for AI-Generated tracks.
 
 The code was previously moved from a private repository.
@@ -116,7 +114,7 @@ The code was previously moved from a private repository.
 
 ### Prerequisites
 *   Node.js & npm
-*   Python 3.8+
+*   Python 3.11.14 (3.11.x)
 *   (Optional) CUDA-enabled GPU for faster inference
 
 ### 1. Clone the Repository
