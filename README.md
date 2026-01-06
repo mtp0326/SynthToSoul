@@ -20,10 +20,10 @@ Duration: November 2025 - January 2026
 
 ## Overview
 
-<div style="display: flex; justify-content: center; gap: 20px;">
+<p float="left">
   <img src="media/homepage.png" alt="Homepage" width="49%" />
   <img src="media/aidetectpage.png" alt="AI Detect Page" width="49%" />
-</div>
+</p>
 
 SynthToSoul is a full-stack audio analysis application designed to distinguish between **Human-Made** and **AI-Generated** music. By combining a custom Deep Learning classifier with audio fingerprinting technology, the system not only detects the origin of a track but also identifies real-world songs that sound similar to AI-generated uploads.
 
@@ -79,9 +79,11 @@ The code was previously moved from a private repository.
 
 - Used an AI-Generated song "fake_54229_udio_0.mp3" from the SONICS dataset. The system runs the file through the CNN model and finds that it is AI-Generated through binary classification.
 
+
 <img src="media/ai2.gif" alt="AI2 Result" width="70%" />
 
 - After finding that the song is AI-Generated, the system generates an audio embedding using TorchOpenL3 and queries the FAISS index to find the Top-K nearest "real song" neighbors from the GTZAN dataset, displaying them as similar tracks.
+
 
 ### Song is Human-Made
 
