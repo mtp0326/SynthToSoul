@@ -185,6 +185,3 @@ The app will be available at `http://localhost:5174/`.
 - Article on AI music and streaming platforms (e.g., The Guardian):  
   `https://www.theguardian.com/technology/2025/nov/13/ai-music-spotify-billboard-charts`  
 - OpenL3 GitHub repository: `https://github.com/marl/openl3`  
-
-## 📄 License
-[MIT](LICENSE)
